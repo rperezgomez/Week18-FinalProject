@@ -36,31 +36,42 @@ const trails = [
 ];
 
 export default function TrailPage() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams();  // Get the trail ID from the URL
+  const navigate = useNavigate();  // To navigate to other pages
+
+  // Find the trail that matches the ID from the URL
   const trail = trails.find(t => t.id === id);
 
+  // If no trail is found, show a "not found" message
   if (!trail) return <p>Trail not found</p>;
 
   return (
+    // Main container for the trail details
+    // Using Bootstrap classes for layout and styling
     <div className="d-flex justify-content-center mt-4">
       <Card style={{ width: '100%', maxWidth: '700px' }}>
         <Card.Img
+          // Image for the trail card
+          // Using variant="top" to place the image at the top of the card
           variant="top"
-          src={trail.image}
-          alt={`Photo of ${trail.title} trail`}
-          loading="lazy"
+          src={trail.image} 
+          alt={`Photo of ${trail.title} trail`}  
+          loading="lazy" 
           style={{ height: '350px', objectFit: 'cover', width: '100%' }}
         />
         <Card.Body>
-          <Card.Title>{trail.title}</Card.Title>
-          <Card.Text>{trail.description}</Card.Text>
+          {/* Card body containing trail details */}
+          {/* Title and description of the trail */}
+          <Card.Title>{trail.title}</Card.Title>  
+          <Card.Text>{trail.description}</Card.Text>  
+
+          {/* Buttons for navigation */}
           <div className="d-flex">
             <Button variant="secondary" className="me-2" onClick={() => navigate(-1)}>
-              Back to Trails
+              Back to Trails  {/* Navigate back to the previous page */}
             </Button>
             <Button variant="primary" onClick={() => navigate(`/reserve/${trail.id}`)}>
-              Reserve Trail
+              Reserve Trail  {/* Navigate to the reservation page for this trail */}
             </Button>
           </div>
         </Card.Body>
